@@ -10,6 +10,7 @@ SSD1306 monochrome OLED display.
 ### Added
 
 - [#203](https://github.com/jamwaffles/ssd1306/pull/203) Added `Ssd1306::release(self)` to release the contained i2c interface.
+- [#2](https://github.com/embedevices-rs/ssd1306/pull/2) Make the library async.
 
 ### Changed
 
