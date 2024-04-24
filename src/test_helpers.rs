@@ -1,8 +1,9 @@
 //! Helpers for use in examples and tests
 
 use display_interface::{AsyncWriteOnlyDataCommand, DisplayError};
-use embedded_hal::{
-    digital::{ErrorType, OutputPin},
+use embedded_hal::
+    digital::{ErrorType, OutputPin};
+use embedded_hal_async::{
     i2c,
     spi::{self, SpiBus},
 };
@@ -37,23 +38,23 @@ impl spi::ErrorType for SpiStub {
 }
 
 impl SpiBus<u8> for SpiStub {
-    fn read(&mut self, _words: &mut [u8]) -> Result<(), Self::Error> {
+    async fn read(&mut self, _words: &mut [u8]) -> Result<(), Self::Error> {
         todo!()
     }
 
-    fn write(&mut self, _words: &[u8]) -> Result<(), Self::Error> {
+    async fn write(&mut self, _words: &[u8]) -> Result<(), Self::Error> {
         Ok(())
     }
 
-    fn transfer(&mut self, _read: &mut [u8], _write: &[u8]) -> Result<(), Self::Error> {
+    async fn transfer(&mut self, _read: &mut [u8], _write: &[u8]) -> Result<(), Self::Error> {
         Ok(())
     }
 
-    fn transfer_in_place(&mut self, _words: &mut [u8]) -> Result<(), Self::Error> {
+    async fn transfer_in_place(&mut self, _words: &mut [u8]) -> Result<(), Self::Error> {
         todo!()
     }
 
-    fn flush(&mut self) -> Result<(), Self::Error> {
+    async fn flush(&mut self) -> Result<(), Self::Error> {
         todo!()
     }
 }
@@ -67,7 +68,7 @@ impl i2c::ErrorType for I2cStub {
 }
 
 impl i2c::I2c for I2cStub {
-    fn transaction(
+    async fn transaction(
         &mut self,
         _address: u8,
         _operations: &mut [i2c::Operation<'_>],
